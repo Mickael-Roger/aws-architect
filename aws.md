@@ -32,6 +32,11 @@
    - Analyze and attribute expenditures
    - Use managed services
 
+
+
+
+
+
 # AWS architecture
 ## Regions
 Each region is independent. The price of services may change regarding the region you use
@@ -44,9 +49,23 @@ Are not affiliated to a region. They are AWS Datacenter PoP that operates only 2
 - Route 53
 - CloudFront
 
+## Regional Edge Cache
+A frequently accessed data is cached in an Edge location, then when this data is supposed to be removed from the Edge cache location (because lessly used), it is cached in the Regional Edge Location that is present in a region
+
+
+
+
 # Services
 ## Route 53
 DNS
 
 ## CloudFront
-Content Delivery CDN
+Content Delivery CDN.
+
+It contains few services :
+- AWS Shield : Anti-DDoS
+- AWS WAF : Web Application Firewall
+- Lambda@Edge
+- S3 Transfert  
+- API Gateway 
+
