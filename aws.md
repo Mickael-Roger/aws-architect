@@ -53,6 +53,10 @@ Are not affiliated to a region. They are AWS Datacenter PoP that operates only 2
 A frequently accessed data is cached in an Edge location, then when this data is supposed to be removed from the Edge cache location (because lessly used), it is cached in the Regional Edge Location that is present in a region
 
 
+# Security
+## Authentication
+Can use a MFA (Multi Factor Authentification) -> Physical or virtual
+
 
 
 # Services
