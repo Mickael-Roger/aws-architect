@@ -68,7 +68,7 @@ IAM Manage:
 
 IAM maintain:
 - Access Policy
-- API Keys
+- API Keys (Up to 2 per user)
 - Password policy and MFA requirements
 
 For all users except root, permissions must be given
@@ -81,6 +81,42 @@ For all users except root, permissions must be given
 - Use groups to assign permissions
 - Principle of Least Privilege
 - Apply an IAM password Policy
+
+### Policy
+A policy is a json file that formally states one or more permissions.
+By default, all permissions are denied
+All explicit deny, always overrides an explicit allow
+More than one policy can be attached to a user or a group at the same time
+
+IAM provides pre-built policy template
+
+### Role
+Role doesn't need pass or store permanent credential and can be associated to a user, a group, a service, Federated users (Active Directory, LDAP, Web Entity)
+
+User must have the PassRole permission.
+
+An EC2 instance can only have ONE role attached at a time
+
+A role has a duration from 15 min to 12 or 36 hours, but EC2 metadata service will keep rotate the role to allow the instance to keep working long time if needed
+
+Can be also used for cross-account : For instance to create a read only access to external auditor.
+- Create a role with readonly permission
+- Attach it to an external AWS userid
+-> The auditor can use my account to readonly without my password
+
+Use access keys, but theses are provided by STS service
+
+### API key
+API access key are permanent and need to be removed or rotate manually.
+
+### STS : Security Token Service
+Used to provide key automatically.
+Best for :
+- Identity Federation : Support SAML (used by Active Directory)
+- Role for cross-account access
+- Role for EC2 or other AWS services
+
+Used when you want to receive temporary credential from IAM
 
 
 # Services
