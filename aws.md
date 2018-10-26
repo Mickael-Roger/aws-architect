@@ -97,7 +97,7 @@ User must have the PassRole permission.
 
 An EC2 instance can only have ONE role attached at a time
 
-A role has a duration from 15 min to 12 or 36 hours, but EC2 metadata service will keep rotate the role to allow the instance to keep working long time if needed
+A role has a duration from 15 min to 12 or 36 hours, but EC2 metadata service will keep rotate the role to allow the instance to keep working long time if needed (Using STS)
 
 Can be also used for cross-account : For instance to create a read only access to external auditor.
 - Create a role with readonly permission
@@ -117,6 +117,17 @@ Best for :
 - Role for EC2 or other AWS services
 
 Used when you want to receive temporary credential from IAM
+
+### Identity Federation
+Managed by STS service. Authenticate users using :
+- Custom Identity Provider
+- LDAP / Active Directory - With SAML
+- Web Identity - With OpenID
+
+### Organization
+AWS organization is composed of a root, then multiple OU (Organisational Unit).
+Specific IAM policy can be set to an OU.
+
 
 
 # Services
