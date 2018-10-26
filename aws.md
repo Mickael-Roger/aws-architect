@@ -57,6 +57,30 @@ A frequently accessed data is cached in an Edge location, then when this data is
 ## Authentication
 Can use a MFA (Multi Factor Authentification) -> Physical or virtual
 
+## IAM
+### Principles
+It's a global scope service (one service for all regions)
+
+IAM Manage:
+- Users
+- Groups
+- Roles (for servers that wanna use AWS services)
+
+IAM maintain:
+- Access Policy
+- API Keys
+- Password policy and MFA requirements
+
+For all users except root, permissions must be given
+
+### Best practices
+- Delete root access keys
+- Activate MFA on root account
+- Create and use an IAM user with Admin privileges instead of the root account
+- Create individual IAM users
+- Use groups to assign permissions
+- Principle of Least Privilege
+- Apply an IAM password Policy
 
 
 # Services
@@ -71,5 +95,4 @@ It contains few services :
 - AWS WAF : Web Application Firewall
 - Lambda@Edge
 - S3 Transfert  
-- API Gateway 
-
+- API Gateway
