@@ -8,7 +8,7 @@ Create different API key
 - For using S3 or another service
 
 ## Federated Identity
-- Use Facebook account
+Use Facebook account
 
 ## Role
 Create and assign role
