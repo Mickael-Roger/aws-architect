@@ -154,6 +154,11 @@ Instance type
    - When you don't use the CPU, you gain credit
    - When you over use the CPU, you can burst it and you loose credit
 
+EC2 IP adresses:
+- Private
+- Public
+- EIP : Elastic Public IP Adress -> A fixed public IP adress that can be attached to an Instance
+
 # Services
 ## Route 53
 DNS
