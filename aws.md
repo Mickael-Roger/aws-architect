@@ -146,6 +146,7 @@ Storage for ECA:
 
 At least 1 security Group is required to build an instance
 
+Network bandwith and performance depends of the instance type (flavor)
 
 
 
