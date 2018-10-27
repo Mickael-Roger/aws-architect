@@ -151,13 +151,20 @@ Network bandwith and performance depends of the instance type (like CPU number o
 Instance type
 - In forme of LetterNumber.Size (T2.medium or G3.large - G for GPU)
 - T2 instance type : Don't give a dedicated CPU. It's a shared CPU. 
-   - When you don't use the CPU, you gain credit
-   - When you over use the CPU, you can burst it and you loose credit
+   - Can active T2 unlimited:
+      - When you don't use the CPU, you gain credit
+       - When you over use the CPU, you can burst it and you loose credit (and be charged if no credit left)
 
 EC2 IP adresses:
 - Private
 - Public
 - EIP : Elastic Public IP Adress -> A fixed public IP adress that can be attached to an Instance
+
+Tenancy:
+- Shared
+- Dedicated : Use a non shared hypervisor
+- Dedicated Host : Use a dedicated host -> Generally used for dedicated software that need specific hardware
+
 
 # Services
 ## Route 53
