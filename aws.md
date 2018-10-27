@@ -165,6 +165,19 @@ Tenancy:
 - Dedicated : Use a non shared hypervisor
 - Dedicated Host : Use a dedicated host -> Generally used for dedicated software that need specific hardware
 
+## Bootstrapping and user-data/meta-data
+### Bootstrapping
+Specific command during the creation process
+
+### User-data
+Basch script for your own command (install httpd for instance)
+
+### User-Data/Meta-data
+Can be view through REST API:
+- curl http://169.254.169.254/latest/user-data/
+- curl http://169.254.169.254/latest/meta-data/
+
+
 
 # Services
 ## Route 53
