@@ -129,6 +129,16 @@ AWS organization is composed of a root, then multiple OU (Organisational Unit).
 Specific IAM policy can be set to an OU.
 
 
+# EC2
+There is an improt service to import VMWare virtual machine to AWS.
+
+AMI = Amazon Machine Image (template)
+
+Storage for ECA:
+- EBS (Elastic Block Store) : Network persistent storage
+- Instance store : Instance ephemeral storage
+
+At least 1 security Group is required to build an instance
 
 # Services
 ## Route 53
