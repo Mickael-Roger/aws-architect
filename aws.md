@@ -148,7 +148,11 @@ At least 1 security Group is required to build an instance
 
 Network bandwith and performance depends of the instance type (like CPU number or Memory)
 
-
+Instance type
+- In forme of LetterNumber.Size (T2.medium or G3.large - G for GPU)
+- T2 instance type : Don't give a dedicated CPU. It's a shared CPU. 
+   - When you don't use the CPU, you gain credit
+   - When you over use the CPU, you can burst it and you loose credit
 
 # Services
 ## Route 53
