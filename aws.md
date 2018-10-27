@@ -134,11 +134,18 @@ There is an improt service to import VMWare virtual machine to AWS.
 
 AMI = Amazon Machine Image (template)
 
+AWS propose 2 types of virtualizations (Choose the good AMI for the virtualization you want)
+- HVM (HardWare Virtual Machine) : Hardware Virtual Machine. Emulate the Bare Metal. No Os modification needed
+   -> Recommanded solution
+- PV (ParaVirtual) : No need for OS modification, but cannot use enhanced hardware like GPU or specific network tuning
+
+
 Storage for ECA:
 - EBS (Elastic Block Store) : Network persistent storage
 - Instance store : Instance ephemeral storage
 
 At least 1 security Group is required to build an instance
+
 
 
 
