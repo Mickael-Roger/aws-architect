@@ -226,6 +226,46 @@ Can be view through REST API:
 Troubleshooting :
 If an instance in a placement group is stopped, it continues to be a member of the placement once it started again. It can have a placement problem "insufficient capacity". That's why AWS suggest launching all the required instances within the the placement group in a single request
 
+# VPC
+## Design
+A VPC is a private network. Each VPC must have an internet gateway attached to it.
+
+A VPC :
+- Is attached to only one region
+- Spans multiple availability zones in the region
+- Contains a DNS server, but you can run your own by changing the DHCP option in the VPC configuration
+
+
+Private Network features:
+- Private and public subnets
+- Scalable architecture
+- Ability to extend on premise network through VPN
+- Ability to configure routes between subnets
+- Ability to configure an internet gateway for resources inside the VPC
+- Layered security
+   - Instance level security : Security Group
+   - Subnet level network ACL : Firewall Rules
+
+## Internet Gateway
+It's a service that connect our VPC to the Internet
+Provides NAT translation
+
+Must be attached to a VPC to provide internet access to instance
+
+## Route tables
+?????
+
+## VPC Security
+### NACLs : Network Access Control List
+Operate at subnet level and allow all traffic by default. Attached to a subnet
+
+Stateless, so return traffic need an outbound rule.
+
+Generally not use for general use case. SG is prefered
+
+### Security Group
+Security Group are stateful. There is no deny rule to Security Group because there is an implicit deny at the end. Only Allow traffic has to be defined.
+
 
 # Services
 ## Route 53
@@ -242,4 +282,4 @@ It contains few services :
 - API Gateway
 
 ## S3
-Need internet access or NAT or VPC endpoint 
+Need internet access or NAT or VPC endpoint
