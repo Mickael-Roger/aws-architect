@@ -130,7 +130,8 @@ Specific IAM policy can be set to an OU.
 
 
 # EC2
-There is an improt service to import VMWare virtual machine to AWS.
+## EC2 essentials
+There is an import service to import VMWare virtual machine to AWS.
 
 AMI = Amazon Machine Image (template)
 
@@ -139,21 +140,52 @@ AWS propose 2 types of virtualizations (Choose the good AMI for the virtualizati
    -> Recommanded solution
 - PV (ParaVirtual) : No need for OS modification, but cannot use enhanced hardware like GPU or specific network tuning
 
-
-Storage for ECA:
-- EBS (Elastic Block Store) : Network persistent storage
-- Instance store : Instance ephemeral storage
-
-At least 1 security Group is required to build an instance
-
-Network bandwith and performance depends of the instance type (like CPU number or Memory)
-
 Instance type
 - In forme of LetterNumber.Size (T2.medium or G3.large - G for GPU)
-- T2 instance type : Don't give a dedicated CPU. It's a shared CPU. 
+- T2 instance type : Don't give a dedicated CPU. It's a shared CPU.
    - Can active T2 unlimited:
       - When you don't use the CPU, you gain credit
        - When you over use the CPU, you can burst it and you loose credit (and be charged if no credit left)
+
+## EC2 storage
+
+Storage for EC2:
+- EBS (Elastic Block Store) : Network persistent storage
+- Instance store : Instance ephemeral storage (local to hypervisor)
+- Elastic File Storage : NFS
+
+EBS : Available on all instance type
+SSD : Only for c3, f1, g2, i3, m3, r3, x1
+HDD : Only for h1, d2
+
+### EBS
+Can be snapshoted (incrementally). A snapshot can be used to create a new EBS or an AMI
+
+Initialization occurs the first time a storage bloc on the volume is read and performance can be impacted by up to 50%. This can be avoid by manually reading all the blocks
+
+2 types :
+- SSD
+   - General purpose : Performance based on 3 IOPS/GB. Can burst up to 3000 IOPS (credit based)
+   - Provisioned IOPS : Up to 32000 IOPS per volume with a maximum of 80000 IOPS per instance
+- Hard Disk Drive
+   - Throughput Optimized : 500MB/s
+   - Clod HDD : Lower cost but 250MB/s
+
+### Instance storage
+Hypervisor local storage. Only exist the duration and can't be snapshoted. In case of instance reboot, it's still maintained
+
+### EFS
+NFS as a service
+Only support NFSv4 (4.0 or 4.1)
+Burst network performance up to 100MB/s
+
+Encrypted data at rest using AWS KMS (Key Management Service)
+
+
+## EC2 Network and security
+At least 1 security Group is required to build an instance
+
+Network bandwith and performance depends of the instance type (like CPU number or Memory)
 
 EC2 IP adresses:
 - Private
@@ -167,7 +199,7 @@ Tenancy:
 
 ## Bootstrapping and user-data/meta-data
 ### Bootstrapping
-Specific command during the creation process
+Specific command without external input during the creation process
 
 ### User-data
 Basch script for your own command (install httpd for instance)
@@ -177,6 +209,22 @@ Can be view through REST API:
 - curl http://169.254.169.254/latest/user-data/
 - curl http://169.254.169.254/latest/meta-data/
 
+## Buying option
+- On demand : Per second pricing with a minimum au 60 seconds (Amazon Linux, Ubuntu, ...) or per hour pricing (Windows, RHEL, ...)
+- Reserved : For 1 to 3 years
+   - Standard, convertible (can change/upgrade), scheduled (1y term)
+- Spot instances :
+   - Spot price fluctuate according to the demand
+   - Instances launch when spot price is less than you maximum price
+   - Automatically terminate or hibernate when spot price exceeds your maximum (2 minutes warning)
+   - You can use spot blocks with a lower discount but specify the duration (Up to 6 hours)
+
+## Placement group
+- Cluster placement group on the same host or close host
+- Spread placement group : On distinct host hardware
+
+Troubleshooting :
+If an instance in a placement group is stopped, it continues to be a member of the placement once it started again. It can have a placement problem "insufficient capacity". That's why AWS suggest launching all the required instances within the the placement group in a single request
 
 
 # Services
