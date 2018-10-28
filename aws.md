@@ -154,9 +154,6 @@ Storage for EC2:
 - Instance store : Instance ephemeral storage (local to hypervisor)
 - Elastic File Storage : NFS
 
-EBS : Available on all instance type
-SSD : Only for c3, f1, g2, i3, m3, r3, x1
-HDD : Only for h1, d2
 
 ### EBS
 Can be snapshoted (incrementally). A snapshot can be used to create a new EBS or an AMI
@@ -169,10 +166,13 @@ Initialization occurs the first time a storage bloc on the volume is read and pe
    - Provisioned IOPS : Up to 32000 IOPS per volume with a maximum of 80000 IOPS per instance
 - Hard Disk Drive
    - Throughput Optimized : 500MB/s
-   - Clod HDD : Lower cost but 250MB/s
+   - Cold HDD : Lower cost but 250MB/s
 
 ### Instance storage
 Hypervisor local storage. Only exist the duration and can't be snapshoted. In case of instance reboot, it's still maintained
+
+SSD : Only for c3, f1, g2, i3, m3, r3, x1
+HDD : Only for h1, d2
 
 ### EFS
 NFS as a service
@@ -240,3 +240,6 @@ It contains few services :
 - Lambda@Edge
 - S3 Transfert  
 - API Gateway
+
+## S3
+Need internet access or NAT or VPC endpoint 
