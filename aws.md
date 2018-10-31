@@ -253,7 +253,7 @@ Provides NAT translation
 Must be attached to a VPC to provide internet access to instance
 
 ## Route tables
-?????
+Think to add a default route to permit internet access
 
 ## VPC Security
 ### NACLs : Network Access Control List
