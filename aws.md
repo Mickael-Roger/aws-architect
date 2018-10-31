@@ -267,7 +267,62 @@ Generally not use for general use case. SG is prefered
 Security Group are stateful. There is no deny rule to Security Group because there is an implicit deny at the end. Only Allow traffic has to be defined.
 
 
+
+
+
 # Services
+## Elastic Load Balancing (ELB)
+An ELB can load balance traffic to instances located across multiple Availibility Zone
+
+ELB can be paired with Auto-scaling
+ELB has its own DNS Record set.
+
+An ELB can be public facing (internet) or internal. SSL certification can be applied directly to en ELB
+
+### Classic ELB
+Simple load balancing to EC2 instances. No specific rules for routing traffic, ...
+Support : TCP, SSL, HTTP and HTTPS
+
+### Application ELB
+It's a layer 7 load balancer. It supports target routing based on specific rules (Host, Path, Conten based, ...)
+It also supports Access Logs, Sticky session and AWS WAF
+
+Like classic ELB, it's based on instances
+
+### Network LB
+Layer 4 load balancer. Designed for extreme performance because it's not based on instances (Can scale very quickly).
+Works only inside the same AZ. IP adresses as targets ans no SSL offloading.
+
+
+## NAT Gateway
+Provides internet access to private IP only instances
+
+Must be created in the public subnet and be part of the private subnet route table
+
+## VPC Endpoints
+Most of AWS services uses public IP adresses to be joined.
+
+To avoid NAT ou public IP using, you can create an endpoint inside your VPC. It has a link to your private network and a link inside a private AWS network from where it can join AWS services.
+
+2 types :
+- Gateway endpoints : S3 and DynamoDB
+- Interface endpoints : CloudWatch logs, CodeBuild, KMS, Kinesis, Service Catalog, ...
+
+A IAM Policy can be applied to a VPC endpoint
+
+## Auto-scaling
+Based on Cloudwatch metrics
+
+Components :
+- Launch configuration : Use EC2 template (AMI, instance type, user-data, storage, security group, ...)
+- Auto-scaling group : Min/Max instances, VPC and AZ, Scaling policy, SNS notifications, ...
+- Cloudwatch alamrs : Alarms are triggered when metrics exceed thresholds
+
+## Stateless architecture
+- Store state information off-instance
+   - NoSQL Database (DynamoDB, Redis, ...)
+   - Shared Filesystem
+
 ## Route 53
 DNS
 
