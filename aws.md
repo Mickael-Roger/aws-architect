@@ -324,7 +324,30 @@ Components :
    - Shared Filesystem
 
 ## Route 53
-DNS
+DNS as a service
+
+- Domain registration
+- DNS service
+- Health Checking (Send request over the internet to verify that it's reachable, available and functionnal)
+
+Can be used :
+- External DNS
+- Internal DNS
+- Latency, GEO, basic and failover routing policies allow for region-to-region fault tolerant architecture design
+- Can easily configure for failover to S3 (if website is down to use a static version of the website from S3)
+
+Route 53 Hosted Zone : Store DNS records
+
+Record sets:
+- Can be : A, AAAA, CNAME, MX
+- Alias record sets : Alias to an AWS specific ressource
+- Routing policy :
+   - Simple : Route all traffic to one endpoint
+   - Weighted : Route traffic to multiple endpoints
+   - Latency : Route traffic to an endpoint based on the users latency
+   - Failover : Route traffic to a secondary endpoint if the primary is unavailable
+   - Geolocation ; Route traffic to an endpoint based on the geographical location of the user
+- Evaluate health check : Can monitor the health of the application and trigger an action
 
 ## CloudFront
 Content Delivery CDN.
@@ -335,6 +358,8 @@ It contains few services :
 - Lambda@Edge
 - S3 Transfert  
 - API Gateway
+
+
 
 ## S3
 Need internet access or NAT or VPC endpoint
