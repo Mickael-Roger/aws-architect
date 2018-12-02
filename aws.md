@@ -450,9 +450,12 @@ Engines availables in ElastiCache :
     - Snapshots
     - Encryption
 
+## Redshift
+It's an OLAP datawarehouse service fully managed and scalable
 
+It's a fork of postgresSQL. Massive parallel processing (A leader node and compute nodes)
 
-
+It's serverless and pay as you go
 
 ## S3
 Need internet access or NAT or VPC endpoint
