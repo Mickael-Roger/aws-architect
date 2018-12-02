@@ -415,7 +415,7 @@ Features :
 - Pay as you go (ACUs, Storage, I/O)
 
 
-# DynamoDB
+## DynamoDB
 NoSQL managed database (Document type NoSQL DB)
 
 Built home grown by AWS but similar to MongoDB
@@ -426,6 +426,11 @@ Fully distributed and scales automatically
 Built as a fault tolerant and highly available service
     - Full synchronization of the data across all AZ within a region
 
+
+## Neptune
+Fully managed NoSQL graph Databases but not serverless.
+
+Up to 64 To and 15 read replicas
 
 
 
