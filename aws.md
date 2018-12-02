@@ -433,7 +433,22 @@ Fully managed NoSQL graph Databases but not serverless.
 Up to 64 To and 15 read replicas
 
 
+## ElastiCache
+Fully managed in-memory data store
 
+Application use API to set and get data
+
+Engines availables in ElastiCache :
+- Memcached
+    - Simple model
+    - Easy to scale
+    - Multithread
+- Redis
+    - Complex data types
+    - Multi AZ failover
+    - Data persistence
+    - Snapshots
+    - Encryption
 
 
 
