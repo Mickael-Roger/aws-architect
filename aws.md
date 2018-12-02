@@ -457,5 +457,63 @@ It's a fork of postgresSQL. Massive parallel processing (A leader node and compu
 
 It's serverless and pay as you go
 
+
 ## S3
 Need internet access or NAT or VPC endpoint
+
+## Essentials
+- A bucket resids only inside one region
+- No charge for transfert inside a same region
+- Object versioning
+- Lifecycle policies
+- Read consistency : Object can be immediately available after been put in a bucket
+- Eventual consistency for PUTS overwritting an existing object or DELETE
+
+## Components
+
+- Bucket
+    - Need a unique name across ALL of AWS
+    - Need a DNS compliant name and no underscores
+    - Only 100 buckets par account at a time (Soft limit)
+- Object
+    - Object are spread across the S3 cluster regardings the prefix name -> Do not use the same prefix for all your files to increase performance
+    - An object can be encrypted (By aws keys or by a provided key)
+    - Organized into sub-name spaces called folder
+- Folders
+    - Support concept of folders
+    - In fact this is a grouping objects
+
+## Main features
+
+- Versioning
+- Versioning permit crossed region replication
+- Storage classes
+    - Standard :
+        - Availability of 99.99%
+        - Most expensive storage class
+        - Default storage option
+    - S3-IA (Infrequent Access) :
+        - Availability of 99.9%
+        - Less expensive than standard class
+        - 30 days minimum charge
+    - S3 One Zone-IA
+        - Availability of 99.5%
+        - Less expensive than S3-IA class
+        - 30 days minimum charge
+    - Glacier
+        - Long term storage
+        - May take several hours for object to be retrieved
+        - 90 days minimum charge
+        - Metadata of object that is moved to glacier keep stay in S3
+- Lifecycle policies
+    - A set of rules that automate the migration of an object storage class to a different class
+    - Disabled by default
+    - Separate policies for current version and previous versions
+- S3 event notifications
+    - Can be sent to SNS, Lambda or SQS Queue
+    - On object creation (PUT, POST, COPY) or object remove
+- S3 permissions
+    - 3 levels
+        - IAM policy -> Apply to a group or role
+        - ACL policy -> Apply to users in other aws account or to the public
+        - Bucket policy -> Apply to a particular bucket
