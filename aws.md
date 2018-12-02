@@ -461,7 +461,7 @@ It's serverless and pay as you go
 ## S3
 Need internet access or NAT or VPC endpoint
 
-## Essentials
+### Essentials
 - A bucket resids only inside one region
 - No charge for transfert inside a same region
 - Object versioning
@@ -469,7 +469,7 @@ Need internet access or NAT or VPC endpoint
 - Read consistency : Object can be immediately available after been put in a bucket
 - Eventual consistency for PUTS overwritting an existing object or DELETE
 
-## Components
+### Components
 
 - Bucket
     - Need a unique name across ALL of AWS
@@ -483,7 +483,7 @@ Need internet access or NAT or VPC endpoint
     - Support concept of folders
     - In fact this is a grouping objects
 
-## Main features
+### Main features
 
 - Versioning
 - Versioning permit crossed region replication
@@ -517,3 +517,21 @@ Need internet access or NAT or VPC endpoint
         - IAM policy -> Apply to a group or role
         - ACL policy -> Apply to users in other aws account or to the public
         - Bucket policy -> Apply to a particular bucket
+- Static web hosting
+    - Amazon route 53 maps human readable domain names to static hosting bucket
+    - Ideal for failover solution
+    - Ideal to store and deliver static part like js, css or image from a web site
+
+### Glacier
+
+It's an archival storage type.
+Should NOT be used as a backup solution
+
+Archive are stored in a vault
+
+Vault lock feature -> When locked, data could not be changed for a period of time defined when locking is triggered
+
+Data retrieval (pricing varies)
+- Expedited : 1-5 minutes
+- Standard : 3-5 hours
+- Bulk : 5-12 hours
