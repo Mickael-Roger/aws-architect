@@ -415,5 +415,24 @@ Features :
 - Pay as you go (ACUs, Storage, I/O)
 
 
+# DynamoDB
+NoSQL managed database (Document type NoSQL DB)
+
+Built home grown by AWS but similar to MongoDB
+
+Schemaless and use a key-value store
+
+Fully distributed and scales automatically
+Built as a fault tolerant and highly available service
+    - Full synchronization of the data across all AZ within a region
+
+
+
+
+
+
+
+
+
 ## S3
 Need internet access or NAT or VPC endpoint
