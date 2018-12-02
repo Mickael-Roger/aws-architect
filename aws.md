@@ -563,3 +563,21 @@ Data retrieval (pricing varies)
         - Gateway-Stored Volumes : Store all data locally in storage volume. Periodically snapshots as incremental backup to S3
     - File gateway : Local NFS. Objects are stored an retrievable in S3
     - Tape gateway : Emulate iSCSI based virtual tape library for Veeam, Veritas, Arcserve, Dell, ...
+
+
+## Hybrid environnment
+### VPN
+
+It's a IPSec VPN using 2 parallel routes for redundancy.
+Only one VPG (Virtual Private Gateway) per VPC
+
+Use static or dynamic routing (BGP)
+
+### AWS Direct Connect
+
+Direct connection to AWS through AWS Direct Connect locations. Provide 1 Gbps or 10 Gbps access.
+Each AWS Direct Connect location is associated with a particular region.
+
+### VPC Peering
+
+It's the best way to permit communication between different VPC. Works inside the same region or with different regions.
