@@ -535,3 +535,31 @@ Data retrieval (pricing varies)
 - Expedited : 1-5 minutes
 - Standard : 3-5 hours
 - Bulk : 5-12 hours
+
+
+### Transferring or backuping data to S3
+
+- PUT file
+- Multipart upload
+    - Upload a single file as sets of parts
+    - Allows for uploading parts of a file concurrently
+    - Allows for stopping/resuming file uploads
+    - Required for objects larger than 5GB
+- S3 Transfert acceleration
+    - Upload content through CloudFront Edge Location
+    - Change endpoint (mybucket.s3.amazonaws.com to mybucket.s3-accelerate.amazonaws.com)
+
+- Snowball
+    - Snowball : Transfert Appliance. 80TB per appliance
+    - Snowball Edge : Idem to Snowball but with onboarding compute capabilities (S3 API Interface and Lambda functions)
+    - Snowmobile : 100PB per snowmobile (A truck)
+
+- Storage Gateway
+    - Connect Datacenter to S3
+    - VMWare and Hyper-V
+    - Volume Gateway :
+        - EBS snapshots for disaster recovery
+        - Gateway-cached Volumes : Create volumes and mount as iSCSI to on-prem. The gateway stores data into S3
+        - Gateway-Stored Volumes : Store all data locally in storage volume. Periodically snapshots as incremental backup to S3
+    - File gateway : Local NFS. Objects are stored an retrievable in S3
+    - Tape gateway : Emulate iSCSI based virtual tape library for Veeam, Veritas, Arcserve, Dell, ...
