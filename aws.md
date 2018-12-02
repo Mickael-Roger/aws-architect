@@ -359,6 +359,60 @@ It contains few services :
 - S3 Transfert  
 - API Gateway
 
+## RDS : Relational Database Service
+Fully managed relational Database service. You can't connect to the underlying system.
+
+- Ability to provision/resize hardware on demand for scaling
+   - On the fly for Storage
+   - Need a reboot for CPU and RAM
+- Multi AZ deployments possible for backup and high availability
+- OLTP database
+- Utilize read replica for MySQL/PosgreSQL/Aurora
+    - Supported in cross region
+    - Read replica can be promoted primary in case of disaster
+
+Supports :
+- MySQL / MariaDB
+- PostgreSQL
+- Oracle
+- MS SQL Server
+- Aurora
+
+Benefits :
+- Automatic minor updates
+- Automatic backups (point in time snapshot)
+    - 35 retentions for automatic snapshots
+    - Manual snapshots can be retained as long as needed
+- PaaS solution
+- Multi AZ
+
+### Stand-by instance : RDS Multi AZ failover
+RDS instance built in another AZ with synchronous replication.
+
+AWS automatically switch the DNS record to this RDS instance in case of : Service outage, primary DB instance failure, instance server type changed, manual failover, updates
+
+RDS backup are taken against this stand by instance to reduce I/O freezes
+
+Database instance must be launched into a subnet group
+
+### Aurora
+AWS own Database fully compatible with MySQL or PostgreSQL (5 times more performant than MySQL and 3 times than PostgreSQL)
+
+Lower price than commercial databases
+
+Features :
+- Continous backup to S3
+- Up to 15 replicas across 3 AZ
+- Replication lag of single digit milliseconds
+- Backtrack in seconds -> Database rollback
+- Multi master option
+
+### Aurora Serverless
+
+- Autoscaling
+- No instance management
+- Scales to zero
+- Pay as you go (ACUs, Storage, I/O)
 
 
 ## S3
