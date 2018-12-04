@@ -581,3 +581,71 @@ Each AWS Direct Connect location is associated with a particular region.
 ### VPC Peering
 
 It's the best way to permit communication between different VPC. Works inside the same region or with different regions.
+
+
+## SNS (Simple Notification Service)
+
+Coordinates and manage the sending and delivery of messages.
+
+Components :
+
+- Topic (With message <256KB)
+- Subscriber : Can be HTTP, HTTPs, Email, SQS, Application, Mobile App notifications, Lambda, SMS
+- Publisher : Application, S3 events or Cloudwatch Alarm
+    - ! PUSH Only to subscriber
+
+For sending email with attachement and size >256KB, use SES (Send Email Service)
+
+One to many.
+
+## SQS (Simple Queue Service)
+
+Goals : Decoupled architecture -> Asynchronous communication
+- Loosely coupled system : Multiple components that can process without being connected (Use message queue)
+- Thightly coupled system : Multiple components are dependent upon each other. If one fails, all components fail
+
+Poll only from workers
+
+Functionalities:
+- 2 types of polling
+    - Short polling : Response immediately if there is a message or not. -> Increase API request, then cost !!!!! TO CHECK
+    - Long polling : Allow SQS service to wait until a message is available. (From 1 to 20 seconds) !!!!! TO CHECK
+- Visibility timeout : How long the message is visible in the queue
+- Auto scaling can be applied based on the queue size
+- Larger than 256KB messages must use S3
+- 2 differents types of queues :
+    - Standard : Guarantees delivery of each message at least once, but not the order
+    - FIFO queue : Order and exactly once processing. But limited to 300 transactions per second (3000 if limit increase requested)
+
+One to one.
+
+
+## Amazon MQ
+
+It's an Apache MQ managed service.
+Usefull for compatibility with legacy
+
+Based on EC2 (Single instance or Highly Available) -> Not scalable
+
+Work as SNS and SQS (one to one or one to many)
+
+
+## SWF (Simple Work Flow)
+
+Fully managed workflow orchestration.
+SWF has consistent execution and guarantees the order in which tasks are executed
+
+A workflow execution can last up to 1 year
+
+Components :
+- Starter : Start the workflow
+- Workflow : Sequence of step
+- Activites : A single step
+- Task : What interact with the worker
+    - Activity task : Tell the worker to perform an action
+    - Decision task : Tell the worker to decide
+- Worker : Responsible for receiving a task and taking action on it
+
+
+
+.
