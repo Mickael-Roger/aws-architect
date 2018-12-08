@@ -693,6 +693,54 @@ Generally used in response to an events (triggered by the event)
     - Kinesis Streams
 
 
+## CloudWatch
+
+Used to monitor most AWS services
+
+### CloudWatch Metrics
+
+Environnment is monitored by configuring and viewing metrics. Metrics are specific to each AWS service ou resource
+    - EC2 : CPUUtilization, CPUCreditUsage, ...
+    - ELB : RequestCount, UnhealthyHostCount, ...
+    - S3 : NimberOfObjects, BucketSizeBytes, ...
+    - ...
+
+2 types of monitoring:
+- EC2 standard level monitoring : 5 minutes period (for free)
+- EC2 Detailed monitoring ; 1 minutes periods (extra charge)
+
+CloudWatch Alarms can be created to trigger alerts or toher actions in AWS such SNS topic, ...
+
+Autoscaling heavily use CloudWatch
+
+Some metrics could need an agent inside the instance for instance for free memory value (Use CloudWatch API)
+
+
+
+### CloudWatch Logs
+
+- Centralized repository
+- Log streams (with EC2 CloudWatch Logs Agent)
+- Metrics can be made from Log streams
+
+### CloudWatch Events
+
+- Create rules to respond to events in Envents Stream
+    - Trigger lambda function
+- Schedule Events
+
+
+## CloudTrail
+
+AWS API logging service. Logs all APi calls made to AWS
+
+- All created logs are placed into a S3 Bucket. Service is free except S3 storage used by logs.
+- Need to be enabled for each region
+- Can send events to CloudWatch Logs 
+
+
+
+
 
 
 .
