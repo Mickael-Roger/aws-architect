@@ -647,5 +647,31 @@ Components :
 - Worker : Responsible for receiving a task and taking action on it
 
 
+## API Gateway
+
+Fully managed service.
+
+Features:
+- RESTful API
+- Deploy to stage (Multiple environnments)
+- Rollback to previous API
+- Custom domain name support
+- Create and manage API key for access AND meter usage through cloudwatch logs
+- Set rules based of the number of requests per second (HTTP 429 response above)
+- Security using Signature v4 to sign and authorize API calls
+    - Temporary credentials through STS service
+
+Benefits:
+- Ability to cache API response
+- DDoS protection through CloudFront
+- SDK generation for Android, Javascript and IOS
+- Support swagger (Popular framework for API)
+- Request/response data transformation (Json to XML, ...)
+
+
+
+
+
+
 
 .
