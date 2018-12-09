@@ -775,12 +775,34 @@ Template contains 5 parts:
 Helper scripts :
 - cfn-init : List of packages to install, users/groups to create, files, command, ...
 - cfn-signal : user with wait conditions and creation policies
-- cfn-hup : In place instance update of packages and software. Changes to meta data 
+- cfn-hup : In place instance update of packages and software. Changes to meta data
 
 ### CloudFormation Designer
 
 Visual designer : WYSIWYG Template designer / Editor
 
+
+## ECS : Elastic Container Service
+
+Container management service that supports Docker
+
+Components:
+- Docker Image
+- Container Registry (ECR)
+- Task definitions (JSON format):    
+    - Docker images
+    - CPU, Memory
+    - Launch type : EC2 or Fargate (managed serverless service)
+- ECS Cluster
+
+
+## EKS : Elastic Container Service for Kubernetes
+
+Kubernetes managd service
+
+Worker nodes are based on EC2
+
+EKS Control plane is fully managed
 
 
 
