@@ -741,13 +741,13 @@ Some metrics could need an agent inside the instance for instance for free memor
 Can be activate on :
 - ELB Logs
 - CloudFront Logs
-- S3 Access Logs 
+- S3 Access Logs
 
 
 
 ## CloudTrail
 
-AWS API logging service. Logs all APi calls made to AWS
+AWS API logging service. Logs all API calls made to AWS
 
 - All created logs are placed into a S3 Bucket. Service is free except S3 storage used by logs.
 - Need to be enabled for each region
@@ -755,6 +755,31 @@ AWS API logging service. Logs all APi calls made to AWS
 
 
 
+## CloudFormation
+
+Use JSON or YAML file to describe, deploy and update the Infrastructure
+
+CloudFormation Engine:
+- Create Stack
+- Update Stack
+- Delete Stack
+- Nested Stack
+
+Template contains 5 parts:
+- Resources : Information about resources to create
+- Parameters : Variables like key-pair, instance type, ...
+- Mappings : Lookup table for AMI ID according to the region for instance
+- Conditions : Condition if a resource will be created. For instance if env=PROD
+- Outputs : Informations to return about Stack. For instance ELB DNS Name, ...
+
+Helper scripts :
+- cfn-init : List of packages to install, users/groups to create, files, command, ...
+- cfn-signal : user with wait conditions and creation policies
+- cfn-hup : In place instance update of packages and software. Changes to meta data 
+
+### CloudFormation Designer
+
+Visual designer : WYSIWYG Template designer / Editor
 
 
 
