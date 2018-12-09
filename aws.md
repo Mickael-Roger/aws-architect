@@ -806,5 +806,24 @@ EKS Control plane is fully managed
 
 
 
+## Elastic Beanstalk
+
+Equivalent to Google App Engine. Manage Load Balancing, Auto scaling, Monitoring, Plateform Management and Code deployement
+
+- Support :
+    - Java, .Net, PHP, Node.js, Python, Ruby and Go
+    - Custom using Docker
+- Can use servers : Apache, Nginx, Passenger or IIS
+
+Support 2 deployments options:
+- In place (rolling) -> Not all the instances at the same time
+- Blue-Green -> 2 differents environnments and Route 53 switch to the new environnment
+
+
+
+
+
+
+
 
 .
