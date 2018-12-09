@@ -730,13 +730,30 @@ Some metrics could need an agent inside the instance for instance for free memor
 - Schedule Events
 
 
+### VPC Flow logs
+
+- Logs about IP traffic inside a VPC
+- Stored in a log group in CloudWatch
+
+
+### Access Logs
+
+Can be activate on :
+- ELB Logs
+- CloudFront Logs
+- S3 Access Logs 
+
+
+
 ## CloudTrail
 
 AWS API logging service. Logs all APi calls made to AWS
 
 - All created logs are placed into a S3 Bucket. Service is free except S3 storage used by logs.
 - Need to be enabled for each region
-- Can send events to CloudWatch Logs 
+- Can send events to CloudWatch Logs
+
+
 
 
 
