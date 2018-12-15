@@ -6,10 +6,11 @@
    - Annotate documentation
    - Make frequent small and reversible change
    - Refine operations procedures frequently
+   - Anticipate failure
    - Learn from all operation failure
 - Reliability
    - Test recovery procedure
-   - Automaticly recover from failure
+   - Automatically recover from failure
    - Scale horizontaly
    - Stop guessing capacity
    - Automate change
@@ -753,6 +754,14 @@ AWS API logging service. Logs all API calls made to AWS
 - Need to be enabled for each region
 - Can send events to CloudWatch Logs
 
+
+## AWS config
+
+Give information about resources configuration, for instance list all elements impacted by a Security Group.
+
+Can send notification when configuration has changed
+
+With config rules, you can check compliance (Is all EBS volumes are encrypted)
 
 
 ## CloudFormation
