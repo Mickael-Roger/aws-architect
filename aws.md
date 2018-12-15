@@ -820,6 +820,29 @@ Support 2 deployments options:
 - Blue-Green -> 2 differents environnments and Route 53 switch to the new environnment
 
 
+## Kinesis
+
+Real time ingesting and processing Big Data. -> Equivalent to DataFlow
+
+4 different services:
+- Kinesis Video Streams : Real time or batch video processing and analytics
+- Kinesis Data Streams
+    - Real time data processing
+    - Kinesis connector to EMR
+    - Data processed in sequence
+    - Server side encryption
+- Kinesis Firehose : Load streaming data to S3, Redshift, Elasticsearch or Splunk
+- Kinesis Data Analytics : Run SQL queries against Data Streams or Firehose and send results to output Data Stream or Firehose
+
+
+Components :
+- Stream : Contains one or more shards
+- Shards (Processing power)
+    - 1MB/s data input and 2MB/s data output
+    - Distribute data to shards using a Partition key
+- Producers (data creators)
+- Consumers (data consumers)
+
 
 
 
