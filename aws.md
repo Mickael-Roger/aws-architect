@@ -844,8 +844,22 @@ Components :
 - Consumers (data consumers)
 
 
+## EMR : Elastic Map Reduce
 
+Managed Hadoop cluster service based on EC2
 
+Advantage
+- Can use S3 : Load into HDFS or keep in S3 (EMRFS)
+- Transient clusters : Temporary cluster for a specific batch
+- Can use spot instances
+- Bootstrapping
+- Scalability
+
+EMR Slave nodes
+- Code node : A slave node that run tasks AND store data in HDFS. At least 1 core node in a cluster
+- Task node : A slave node that only run tasks
+
+Result of the reduce phase has to be stored in S3
 
 
 
