@@ -34,6 +34,28 @@
    - Use managed services
 
 
+## Disaster recovery strategy
+
+- RTO : Recovery Time Objective - How long to recover
+- RPO : Recovery Point Objective - How much data is lost
+
+4 strategies:
+- Backup and restore
+    - Need AMI and Backup in another region
+    - Rebuild the application in another region and modify DNS to point on it
+- Pilot light
+    - Cross region replication for Data services (RDS, DynamoDB, S3)
+    - Smaller DB instance
+    - Infrastructure built in another region, but stopped except for Data service
+    - In case of disaster : Start instances, scale up DB and promote to primary, modify DNS
+- Low capacity standby
+    - Idem Pilot light but instances are up and DB are in multi master
+    - Route 53 DNS routes a few amount of traffic to this region even in normal state
+    - In case of disaster, just scale up/autoscale for full production capacity
+- Multi site active-active
+    - Full capacity running 24/7 in two regions
+    - In normal state, 50% of traffic goes to each region
+    - In case of disaster, route 53 DNS route traffic to only one region
 
 
 
@@ -56,7 +78,7 @@ A frequently accessed data is cached in an Edge location, then when this data is
 
 # Security
 ## Authentication
-Can use a MFA (Multi Factor Authentification) -> Physical or virtual
+Can use a MFA (Multi Factor Authentication) -> Physical or virtual
 
 ## IAM
 ### Principles
@@ -764,6 +786,11 @@ Can send notification when configuration has changed
 With config rules, you can check compliance (Is all EBS volumes are encrypted)
 
 
+## Trusted Advisor
+
+Give recommendation about cost optimzation, performance, service limits, security and fault tolerancy
+
+
 ## CloudFormation
 
 Use JSON or YAML file to describe, deploy and update the Infrastructure
@@ -871,5 +898,15 @@ EMR Slave nodes
 Result of the reduce phase has to be stored in S3
 
 
+## Encryption on AWS
+### KMS : Key Management Service
 
-.
+- Unique data key for each data object
+- Integrated with : EBS, S3, RDS, Redshift, Elastic Transcoder, Workmail, EMR, SQS, Kinesis
+- Only master key resides in KMS and never leave it
+
+### Cloud HSM
+
+- Single tenant hardware
+- AWS manages firmware updates and automatic backups
+- AWS has no access to keys
