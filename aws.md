@@ -1,6 +1,7 @@
 # Well architected Framework
 
 5 pillars :
+
 - Operational excellence
    - Operations as code
    - Annotate documentation
@@ -8,24 +9,29 @@
    - Refine operations procedures frequently
    - Anticipate failure
    - Learn from all operation failure
+   
 - Reliability
    - Test recovery procedure
    - Automatically recover from failure
    - Scale horizontaly
    - Stop guessing capacity
    - Automate change
+   
 - Security
+
    - Strong identity fondation
    - Tracability
    - Apply security at every level
    - Automate security
    - Protect data in transit and at rest
    - Prepare for security events
+   
 - Performance efficiency
    - Democratize advanced technologie
    - Go global in minute
    - Use serverless architecture
    - Experiment more often
+   
 - Cost optimization
    - Adopt consumption model
    - Mesure overall efficiency
@@ -40,6 +46,7 @@
 - RPO : Recovery Point Objective - How much data is lost
 
 4 strategies:
+
 - Backup and restore
     - Need AMI and Backup in another region
     - Rebuild the application in another region and modify DNS to point on it
@@ -69,6 +76,7 @@ Grouped in a region (18 active regions now) and separated from few miles
 
 ## Edge locations
 Are not affiliated to a region. They are AWS Datacenter PoP that operates only 2 services:
+
 - Route 53
 - CloudFront
 
@@ -85,11 +93,13 @@ Can use a MFA (Multi Factor Authentication) -> Physical or virtual
 It's a global scope service (one service for all regions)
 
 IAM Manage:
+
 - Users
 - Groups
 - Roles (for servers that wanna use AWS services)
 
 IAM maintain:
+
 - Access Policy
 - API Keys (Up to 2 per user)
 - Password policy and MFA requirements
@@ -97,6 +107,7 @@ IAM maintain:
 For all users except root, permissions must be given
 
 ### Best practices
+
 - Delete root access keys
 - Activate MFA on root account
 - Create and use an IAM user with Admin privileges instead of the root account
@@ -123,9 +134,10 @@ An EC2 instance can only have ONE role attached at a time
 A role has a duration from 15 min to 12 or 36 hours, but EC2 metadata service will keep rotate the role to allow the instance to keep working long time if needed (Using STS)
 
 Can be also used for cross-account : For instance to create a read only access to external auditor.
+
 - Create a role with readonly permission
 - Attach it to an external AWS userid
--> The auditor can use my account to readonly without my password
+    -> The auditor can use my account to readonly without my password
 
 Use access keys, but theses are provided by STS service
 
@@ -134,7 +146,9 @@ API access key are permanent and need to be removed or rotate manually.
 
 ### STS : Security Token Service
 Used to provide key automatically.
+
 Best for :
+
 - Identity Federation : Support SAML (used by Active Directory)
 - Role for cross-account access
 - Role for EC2 or other AWS services
@@ -142,7 +156,9 @@ Best for :
 Used when you want to receive temporary credential from IAM
 
 ### Identity Federation
+
 Managed by STS service. Authenticate users using :
+
 - Custom Identity Provider
 - LDAP / Active Directory - With SAML
 - Web Identity - With OpenID
@@ -159,11 +175,13 @@ There is an import service to import VMWare virtual machine to AWS.
 AMI = Amazon Machine Image (template)
 
 AWS propose 2 types of virtualizations (Choose the good AMI for the virtualization you want)
+
 - HVM (HardWare Virtual Machine) : Hardware Virtual Machine. Emulate the Bare Metal. No Os modification needed
    -> Recommanded solution
 - PV (ParaVirtual) : No need for OS modification, but cannot use enhanced hardware like GPU or specific network tuning
 
 Instance type
+
 - In forme of LetterNumber.Size (T2.medium or G3.large - G for GPU)
 - T2 instance type : Don't give a dedicated CPU. It's a shared CPU.
    - Can active T2 unlimited:
@@ -173,6 +191,7 @@ Instance type
 ## EC2 storage
 
 Storage for EC2:
+
 - EBS (Elastic Block Store) : Network persistent storage
 - Instance store : Instance ephemeral storage (local to hypervisor)
 - Elastic File Storage : NFS
@@ -184,9 +203,11 @@ Can be snapshoted (incrementally). A snapshot can be used to create a new EBS or
 Initialization occurs the first time a storage bloc on the volume is read and performance can be impacted by up to 50%. This can be avoid by manually reading all the blocks
 
 2 types :
+
 - SSD
    - General purpose : Performance based on 3 IOPS/GB. Can burst up to 3000 IOPS (credit based)
    - Provisioned IOPS : Up to 32000 IOPS per volume with a maximum of 80000 IOPS per instance
+   
 - Hard Disk Drive
    - Throughput Optimized : 500MB/s
    - Cold HDD : Lower cost but 250MB/s
@@ -211,11 +232,13 @@ At least 1 security Group is required to build an instance
 Network bandwith and performance depends of the instance type (like CPU number or Memory)
 
 EC2 IP adresses:
+
 - Private
 - Public
 - EIP : Elastic Public IP Adress -> A fixed public IP adress that can be attached to an Instance
 
 Tenancy:
+
 - Shared
 - Dedicated : Use a non shared hypervisor
 - Dedicated Host : Use a dedicated host -> Generally used for dedicated software that need specific hardware
@@ -233,9 +256,12 @@ Can be view through REST API:
 - curl http://169.254.169.254/latest/meta-data/
 
 ## Buying option
+
 - On demand : Per second pricing with a minimum au 60 seconds (Amazon Linux, Ubuntu, ...) or per hour pricing (Windows, RHEL, ...)
+
 - Reserved : For 1 to 3 years
    - Standard, convertible (can change/upgrade), scheduled (1y term)
+   
 - Spot instances :
    - Spot price fluctuate according to the demand
    - Instances launch when spot price is less than you maximum price
@@ -243,6 +269,7 @@ Can be view through REST API:
    - You can use spot blocks with a lower discount but specify the duration (Up to 6 hours)
 
 ## Placement group
+
 - Cluster placement group on the same host or close host
 - Spread placement group : On distinct host hardware
 
@@ -254,12 +281,14 @@ If an instance in a placement group is stopped, it continues to be a member of t
 A VPC is a private network. Each VPC must have an internet gateway attached to it.
 
 A VPC :
+
 - Is attached to only one region
 - Spans multiple availability zones in the region
 - Contains a DNS server, but you can run your own by changing the DHCP option in the VPC configuration
 
 
 Private Network features:
+
 - Private and public subnets
 - Scalable architecture
 - Ability to extend on premise network through VPN
@@ -328,6 +357,7 @@ Most of AWS services uses public IP adresses to be joined.
 To avoid NAT ou public IP using, you can create an endpoint inside your VPC. It has a link to your private network and a link inside a private AWS network from where it can join AWS services.
 
 2 types :
+
 - Gateway endpoints : S3 and DynamoDB
 - Interface endpoints : CloudWatch logs, CodeBuild, KMS, Kinesis, Service Catalog, ...
 
@@ -337,11 +367,13 @@ A IAM Policy can be applied to a VPC endpoint
 Based on Cloudwatch metrics
 
 Components :
+
 - Launch configuration : Use EC2 template (AMI, instance type, user-data, storage, security group, ...)
 - Auto-scaling group : Min/Max instances, VPC and AZ, Scaling policy, SNS notifications, ...
 - Cloudwatch alamrs : Alarms are triggered when metrics exceed thresholds
 
 ## Stateless architecture
+
 - Store state information off-instance
    - NoSQL Database (DynamoDB, Redis, ...)
    - Shared Filesystem
@@ -354,6 +386,7 @@ DNS as a service
 - Health Checking (Send request over the internet to verify that it's reachable, available and functionnal)
 
 Can be used :
+
 - External DNS
 - Internal DNS
 - Latency, GEO, basic and failover routing policies allow for region-to-region fault tolerant architecture design
@@ -362,6 +395,7 @@ Can be used :
 Route 53 Hosted Zone : Store DNS records
 
 Record sets:
+
 - Can be : A, AAAA, CNAME, MX
 - Alias record sets : Alias to an AWS specific ressource
 - Routing policy :
@@ -376,10 +410,11 @@ Record sets:
 Content Delivery CDN.
 
 It contains few services :
+
 - AWS Shield : Anti-DDoS
 - AWS WAF : Web Application Firewall
 - Lambda@Edge
-- S3 Transfert  
+- S3 Transfert
 - API Gateway
 
 ## RDS : Relational Database Service
@@ -395,6 +430,7 @@ Fully managed relational Database service. You can't connect to the underlying s
     - Read replica can be promoted primary in case of disaster
 
 Supports :
+
 - MySQL / MariaDB
 - PostgreSQL
 - Oracle
@@ -402,6 +438,7 @@ Supports :
 - Aurora
 
 Benefits :
+
 - Automatic minor updates
 - Automatic backups (point in time snapshot)
     - 35 retentions for automatic snapshots
@@ -424,6 +461,7 @@ AWS own Database fully compatible with MySQL or PostgreSQL (5 times more perform
 Lower price than commercial databases
 
 Features :
+
 - Continous backup to S3
 - Up to 15 replicas across 3 AZ
 - Replication lag of single digit milliseconds
@@ -462,6 +500,7 @@ Fully managed in-memory data store
 Application use API to set and get data
 
 Engines availables in ElastiCache :
+
 - Memcached
     - Simple model
     - Easy to scale
@@ -485,6 +524,7 @@ It's serverless and pay as you go
 Need internet access or NAT or VPC endpoint
 
 ### Essentials
+
 - A bucket resids only inside one region
 - No charge for transfert inside a same region
 - Object versioning
@@ -630,6 +670,7 @@ Goals : Decoupled architecture -> Asynchronous communication
 Poll only from workers
 
 Functionalities:
+
 - 2 types of polling
     - Short polling : Response immediately if there is a message or not. -> Increase API request, then cost !!!!! TO CHECK
     - Long polling : Allow SQS service to wait until a message is available. (From 1 to 20 seconds) !!!!! TO CHECK
@@ -661,6 +702,7 @@ SWF has consistent execution and guarantees the order in which tasks are execute
 A workflow execution can last up to 1 year
 
 Components :
+
 - Starter : Start the workflow
 - Workflow : Sequence of step
 - Activites : A single step
@@ -675,6 +717,7 @@ Components :
 Fully managed service.
 
 Features:
+
 - RESTful API
 - Deploy to stage (Multiple environnments)
 - Rollback to previous API
@@ -685,6 +728,7 @@ Features:
     - Temporary credentials through STS service
 
 Benefits:
+
 - Ability to cache API response
 - DDoS protection through CloudFront
 - SDK generation for Android, Javascript and IOS
@@ -762,6 +806,7 @@ Some metrics could need an agent inside the instance for instance for free memor
 ### Access Logs
 
 Can be activate on :
+
 - ELB Logs
 - CloudFront Logs
 - S3 Access Logs
@@ -796,12 +841,14 @@ Give recommendation about cost optimzation, performance, service limits, securit
 Use JSON or YAML file to describe, deploy and update the Infrastructure
 
 CloudFormation Engine:
+
 - Create Stack
 - Update Stack
 - Delete Stack
 - Nested Stack
 
 Template contains 5 parts:
+
 - Resources : Information about resources to create
 - Parameters : Variables like key-pair, instance type, ...
 - Mappings : Lookup table for AMI ID according to the region for instance
@@ -809,6 +856,7 @@ Template contains 5 parts:
 - Outputs : Informations to return about Stack. For instance ELB DNS Name, ...
 
 Helper scripts :
+
 - cfn-init : List of packages to install, users/groups to create, files, command, ...
 - cfn-signal : user with wait conditions and creation policies
 - cfn-hup : In place instance update of packages and software. Changes to meta data
@@ -823,9 +871,10 @@ Visual designer : WYSIWYG Template designer / Editor
 Container management service that supports Docker
 
 Components:
+
 - Docker Image
 - Container Registry (ECR)
-- Task definitions (JSON format):    
+- Task definitions (JSON format):
     - Docker images
     - CPU, Memory
     - Launch type : EC2 or Fargate (managed serverless service)
@@ -847,11 +896,13 @@ EKS Control plane is fully managed
 Equivalent to Google App Engine. Manage Load Balancing, Auto scaling, Monitoring, Plateform Management and Code deployement
 
 - Support :
+
     - Java, .Net, PHP, Node.js, Python, Ruby and Go
     - Custom using Docker
 - Can use servers : Apache, Nginx, Passenger or IIS
 
 Support 2 deployments options:
+
 - In place (rolling) -> Not all the instances at the same time
 - Blue-Green -> 2 differents environnments and Route 53 switch to the new environnment
 
@@ -861,6 +912,7 @@ Support 2 deployments options:
 Real time ingesting and processing Big Data. -> Equivalent to DataFlow
 
 4 different services:
+
 - Kinesis Video Streams : Real time or batch video processing and analytics
 - Kinesis Data Streams
     - Real time data processing
@@ -872,6 +924,7 @@ Real time ingesting and processing Big Data. -> Equivalent to DataFlow
 
 
 Components :
+
 - Stream : Contains one or more shards
 - Shards (Processing power)
     - 1MB/s data input and 2MB/s data output
